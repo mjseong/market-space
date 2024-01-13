@@ -1,0 +1,57 @@
+package com.juneox.marketspace.domain.model.meta.cache;
+
+import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceDto;
+import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceGroupDto;
+import com.juneox.marketspace.domain.model.meta.dto.ServiceIndustryDto;
+import com.juneox.marketspace.domain.model.meta.entity.MarketSpace;
+import com.juneox.marketspace.domain.model.meta.entity.MarketSpaceGroup;
+import com.juneox.marketspace.domain.model.meta.entity.ServiceIndustry;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class MetaCacheStore {
+
+    private final ConcurrentHashMap<String, MarketSpaceGroup> marketSpaceGroupMap = new ConcurrentHashMap();
+    private final ConcurrentHashMap<String, MarketSpace> marketSpaceMap = new ConcurrentHashMap();
+    private final ConcurrentHashMap<String, ServiceIndustry> serviceIndustryMap = new ConcurrentHashMap();
+
+    private final ConcurrentHashMap<String, MarketSpaceGroupDto> marketSpaceGroupDtoMap = new ConcurrentHashMap();
+    private final ConcurrentHashMap<String, MarketSpaceDto> marketSpaceDtoMap = new ConcurrentHashMap();
+    private final ConcurrentHashMap<String, ServiceIndustryDto> serviceIndustryDtoMap = new ConcurrentHashMap();
+
+    private static class SingletonHolder{
+        static final MetaCacheStore _INSTANCE = new MetaCacheStore();
+    }
+
+    public static MetaCacheStore getInstance(){
+        return SingletonHolder._INSTANCE;
+    }
+
+    public void putMarketSpaceGroupDto(MarketSpaceGroupDto marketSpaceGroupDto){
+        marketSpaceGroupDtoMap.putIfAbsent(marketSpaceGroupDto.getMarketSpaceGroupCode(), marketSpaceGroupDto);
+    }
+
+    public void putMarketSpaceDto(MarketSpaceDto marketSpaceDto){
+        marketSpaceDtoMap.putIfAbsent(marketSpaceDto.getMarketSpaceCode(), marketSpaceDto);
+    }
+
+    public void putServiceIndustryDto(ServiceIndustryDto serviceIndustryDto){
+        serviceIndustryDtoMap.putIfAbsent(serviceIndustryDto.getServiceIndustryCode(), serviceIndustryDto);
+    }
+
+    public Map<String, MarketSpaceDto> getMarketSpaceDtoMap(){
+        return marketSpaceDtoMap;
+    }
+
+    public Map<String, MarketSpaceGroupDto> getMarketSpaceGroupDtoMap(){
+        return marketSpaceGroupDtoMap;
+    }
+
+    public Map<String, ServiceIndustryDto> getServiceIndustryDtoMap(){
+        return serviceIndustryDtoMap;
+    }
+
+
+
+}
