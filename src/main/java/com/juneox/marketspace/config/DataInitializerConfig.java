@@ -17,7 +17,7 @@ public class DataInitializerConfig {
     @EventListener(ApplicationReadyEvent.class)
     public void loadData(){
         try{
-            metaDataFacadeService.loadMarketSpaceDataFile("./sample/sample.csv");
+//            metaDataFacadeService.loadMarketSpaceDataFile("./sample/sample.csv");
         }catch (RuntimeException re){
             log.error("load config init error: ", re);
         }
