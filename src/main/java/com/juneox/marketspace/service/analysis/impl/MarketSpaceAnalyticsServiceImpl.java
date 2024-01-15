@@ -1,10 +1,10 @@
 package com.juneox.marketspace.service.analysis.impl;
 
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MarketSpaceAnalyticsDto;
-import com.juneox.marketspace.domain.model.analysis.entity.MarketSpaceAnalytics;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
+import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
+import com.juneox.marketspace.domain.analysis.entity.MarketSpaceAnalytics;
 import com.juneox.marketspace.persistence.jdbc.AnalyticsJdbcRepository;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceAnalyticsRepository;
 import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,6 +1,6 @@
 package com.juneox.marketspace.persistence.jdbc;
 
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 
 import java.util.List;
 

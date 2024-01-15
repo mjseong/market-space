@@ -1,16 +1,16 @@
 package com.juneox.marketspace.app.facade;
 
-import com.juneox.marketspace.domain.model.analysis.dto.MarketSpaceAnalyticsDto;
-import com.juneox.marketspace.domain.model.meta.cache.MetaCacheStore;
-import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceDto;
-import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceGroupDto;
-import com.juneox.marketspace.domain.model.meta.dto.ServiceIndustryDto;
-import com.juneox.marketspace.domain.model.meta.entity.MarketSpace;
-import com.juneox.marketspace.domain.model.meta.entity.MarketSpaceGroup;
-import com.juneox.marketspace.domain.model.meta.entity.ServiceIndustry;
-import com.juneox.marketspace.domain.model.raw.MarketSpaceRawData;
-import com.juneox.marketspace.domain.model.raw.dto.FileMetaDto;
-import com.juneox.marketspace.domain.model.raw.entity.FileMetaInfo;
+import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
+import com.juneox.marketspace.domain.meta.cache.MetaCacheStore;
+import com.juneox.marketspace.domain.meta.dto.MarketSpaceDto;
+import com.juneox.marketspace.domain.meta.dto.MarketSpaceGroupDto;
+import com.juneox.marketspace.domain.meta.dto.ServiceIndustryDto;
+import com.juneox.marketspace.domain.meta.entity.MarketSpace;
+import com.juneox.marketspace.domain.meta.entity.MarketSpaceGroup;
+import com.juneox.marketspace.domain.meta.entity.ServiceIndustry;
+import com.juneox.marketspace.domain.raw.MarketSpaceRawData;
+import com.juneox.marketspace.domain.raw.dto.FileMetaDto;
+import com.juneox.marketspace.domain.raw.entity.FileMetaInfo;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
 import com.juneox.marketspace.service.meta.MarketSpaceGroupService;
 import com.juneox.marketspace.service.meta.MarketSpaceService;

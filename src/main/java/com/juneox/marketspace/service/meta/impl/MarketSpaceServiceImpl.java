@@ -1,20 +1,18 @@
 package com.juneox.marketspace.service.meta.impl;
 
-import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceDto;
-import com.juneox.marketspace.domain.model.meta.entity.MarketSpace;
+import com.juneox.marketspace.domain.exception.NoSupportedException;
+import com.juneox.marketspace.domain.meta.dto.MarketSpaceDto;
+import com.juneox.marketspace.domain.meta.entity.MarketSpace;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceRepository;
 import com.juneox.marketspace.service.meta.MarketSpaceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -62,12 +60,12 @@ public class MarketSpaceServiceImpl implements MarketSpaceService {
     @Transactional
     @Override
     public MarketSpace modifyMarketSpace() {
-        return null;
+        throw new NoSupportedException();
     }
 
     @Transactional
     @Override
     public void deleteMarketSpace(long id) {
-
+        throw new NoSupportedException();
     }
 }

@@ -1,7 +1,7 @@
 package com.juneox.marketspace.service.meta;
 
-import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceDto;
-import com.juneox.marketspace.domain.model.meta.entity.MarketSpace;
+import com.juneox.marketspace.domain.meta.dto.MarketSpaceDto;
+import com.juneox.marketspace.domain.meta.entity.MarketSpace;
 
 import java.util.List;
 import java.util.Map;

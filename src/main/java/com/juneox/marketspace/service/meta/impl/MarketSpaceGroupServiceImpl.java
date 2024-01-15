@@ -1,19 +1,18 @@
 package com.juneox.marketspace.service.meta.impl;
 
-import com.juneox.marketspace.domain.model.meta.dto.MarketSpaceGroupDto;
-import com.juneox.marketspace.domain.model.meta.entity.MarketSpaceGroup;
+import com.juneox.marketspace.domain.meta.dto.MarketSpaceGroupDto;
+import com.juneox.marketspace.domain.meta.entity.MarketSpaceGroup;
+import com.juneox.marketspace.domain.exception.NoSupportedException;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceGroupRepository;
 import com.juneox.marketspace.service.meta.MarketSpaceGroupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -64,11 +63,11 @@ public class MarketSpaceGroupServiceImpl implements MarketSpaceGroupService {
 
     @Override
     public MarketSpaceGroup modifyMarketSpaceGroup() {
-        return null;
+        throw new NoSupportedException();
     }
 
     @Override
     public void deleteMarketSpaceGroup(long id) {
-
+        throw new NoSupportedException();
     }
 }

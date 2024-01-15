@@ -1,8 +1,8 @@
 package com.juneox.marketspace.persistence.qdsl;
 
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.domain.model.analysis.entity.QMarketSpaceAnalytics;
 import com.juneox.marketspace.domain.model.meta.entity.QServiceIndustry;
 import com.querydsl.core.Tuple;

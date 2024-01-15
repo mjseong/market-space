@@ -1,8 +1,8 @@
 package com.juneox.marketspace.app.facade;
 
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
 import com.juneox.marketspace.app.response.ServiceIndustriesResponse;
 import com.juneox.marketspace.app.response.ServiceIndustriesWithLowCloseRateResponse;

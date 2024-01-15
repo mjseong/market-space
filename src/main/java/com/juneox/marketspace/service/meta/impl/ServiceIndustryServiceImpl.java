@@ -1,7 +1,8 @@
 package com.juneox.marketspace.service.meta.impl;
 
-import com.juneox.marketspace.domain.model.meta.dto.ServiceIndustryDto;
-import com.juneox.marketspace.domain.model.meta.entity.ServiceIndustry;
+import com.juneox.marketspace.domain.exception.NoSupportedException;
+import com.juneox.marketspace.domain.meta.dto.ServiceIndustryDto;
+import com.juneox.marketspace.domain.meta.entity.ServiceIndustry;
 import com.juneox.marketspace.persistence.jpa.ServiceIndustryRepository;
 import com.juneox.marketspace.service.meta.ServiceIndustryService;
 import lombok.RequiredArgsConstructor;
@@ -57,12 +58,12 @@ public class ServiceIndustryServiceImpl implements ServiceIndustryService {
     @Transactional
     @Override
     public ServiceIndustry modifyServiceIndustry() {
-        return null;
+        throw new NoSupportedException();
     }
 
     @Transactional
     @Override
     public void deleteServiceIndustry(long id) {
-
+        throw new NoSupportedException();
     }
 }

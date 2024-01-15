@@ -1,9 +1,9 @@
 package com.juneox.marketspace.service.analysis;
 
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryDto;
-import com.juneox.marketspace.domain.model.analysis.dto.MarketSpaceAnalyticsDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
+import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
+import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
 
 import java.util.List;
 

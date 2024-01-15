@@ -1,7 +1,7 @@
 package com.juneox.marketspace.service.raw.impl;
 
-import com.juneox.marketspace.domain.model.raw.dto.FileMetaDto;
-import com.juneox.marketspace.domain.model.raw.entity.FileMetaInfo;
+import com.juneox.marketspace.domain.raw.dto.FileMetaDto;
+import com.juneox.marketspace.domain.raw.entity.FileMetaInfo;
 import com.juneox.marketspace.persistence.jpa.FileMetaRepository;
 import com.juneox.marketspace.service.raw.FileMetaService;
 import lombok.RequiredArgsConstructor;
