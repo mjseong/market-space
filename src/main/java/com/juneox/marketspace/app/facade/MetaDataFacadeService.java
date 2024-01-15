@@ -8,7 +8,7 @@ import com.juneox.marketspace.domain.meta.dto.ServiceIndustryDto;
 import com.juneox.marketspace.domain.meta.entity.MarketSpace;
 import com.juneox.marketspace.domain.meta.entity.MarketSpaceGroup;
 import com.juneox.marketspace.domain.meta.entity.ServiceIndustry;
-import com.juneox.marketspace.domain.raw.MarketSpaceRawData;
+import com.juneox.marketspace.domain.raw.dto.MarketSpaceRawData;
 import com.juneox.marketspace.domain.raw.dto.FileMetaDto;
 import com.juneox.marketspace.domain.raw.entity.FileMetaInfo;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;

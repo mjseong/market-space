@@ -24,3 +24,7 @@ spring:
 logging:
   level:
     com.juneox.marketspace : debug
+
+app:
+  market-space:
+    file-store: ./filestore

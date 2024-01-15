@@ -1,4 +1,4 @@
-package com.juneox.marketspace.domain.raw;
+package com.juneox.marketspace.domain.raw.dto;
 
 import lombok.Builder;
 import lombok.Data;
