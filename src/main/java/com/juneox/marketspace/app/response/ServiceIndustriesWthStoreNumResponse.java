@@ -1,17 +1,13 @@
 package com.juneox.marketspace.app.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Data
-public class ServiceIndustriesWthStoreNumResponse {
+public class ServiceIndustriesWthStoreNumResponse extends ServiceIndustriesResponse {
 
-//    @JsonProperty("svc_industry_code")
-//    String serviceIndustryCode;
-    @JsonProperty("svc_industry_code_name")
-    String serviceIndustryCodeName;
-//    @JsonProperty("stores_number")
-//    private int storesNumber;
+    @JsonProperty("stores_number")
+    private int storesNumber;
 }

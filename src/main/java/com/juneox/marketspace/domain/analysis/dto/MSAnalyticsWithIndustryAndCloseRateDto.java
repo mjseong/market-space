@@ -1,13 +1,16 @@
 package com.juneox.marketspace.domain.analysis.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@SuperBuilder
 @Getter
-public class MSAnalyticsWithIndustryAndCloseRateDto {
+public class MSAnalyticsWithIndustryAndCloseRateDto extends MSAnalyticsWithIndustryDto {
 
-    private String yearAndQuarterCode;
-    private String serviceIndustryCodeName;
     private int bizCloseStoreRate;
+
+    public MSAnalyticsWithIndustryAndCloseRateDto(String yearAndQuarterCode, String serviceIndustryCodeName, int bizCloseStoreRate) {
+        super(yearAndQuarterCode, serviceIndustryCodeName);
+        this.bizCloseStoreRate = bizCloseStoreRate;
+    }
 }

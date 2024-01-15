@@ -1,13 +1,18 @@
 package com.juneox.marketspace.domain.analysis.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@SuperBuilder
 @Getter
 public class MSAnalyticsWithIndustryDto {
 
     private String yearAndQuarterCode;
     private String serviceIndustryCodeName;
+
+    public MSAnalyticsWithIndustryDto(String yearAndQuarterCode, String serviceIndustryCodeName) {
+        this.yearAndQuarterCode = yearAndQuarterCode;
+        this.serviceIndustryCodeName = serviceIndustryCodeName;
+    }
 
 }

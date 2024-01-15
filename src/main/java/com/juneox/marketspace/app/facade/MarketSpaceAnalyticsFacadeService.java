@@ -1,12 +1,10 @@
 package com.juneox.marketspace.app.facade;
 
+import com.juneox.marketspace.app.response.ServiceIndustryNamesResponse;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
-import com.juneox.marketspace.app.response.ServiceIndustriesResponse;
-import com.juneox.marketspace.app.response.ServiceIndustriesWithLowCloseRateResponse;
-import com.juneox.marketspace.app.response.ServiceIndustriesWthStoreNumResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,49 +19,55 @@ public class MarketSpaceAnalyticsFacadeService {
     private final MarketSpaceAnalyticsService marketSpaceAnalyticsService;
 
     @Transactional(readOnly = true)
-    public List<ServiceIndustriesResponse> getIndustryNamesByYearQuarter(List<String> yearAndQuarterCodes){
+    public ServiceIndustryNamesResponse getIndustryNamesByYearQuarter(List<String> yearAndQuarterCodes){
         List<MSAnalyticsWithIndustryDto> results =
                 marketSpaceAnalyticsService.getMSAnalyticsWithIndustryNames(yearAndQuarterCodes);
         if(!results.isEmpty()) {
-            return results.stream()
-                    .map(p -> ServiceIndustriesResponse.builder()
-                            .serviceIndustryCodeName(p.getServiceIndustryCodeName())
-                            .build())
+            var list = results.stream()
+                    .map(p-> p.getServiceIndustryCodeName())
                     .collect(Collectors.toList());
+
+            return ServiceIndustryNamesResponse.builder()
+                    .serviceIndustryNames(list)
+                    .build();
         }
 
         return null;
     }
 
     @Transactional(readOnly = true)
-    public List<ServiceIndustriesWthStoreNumResponse> getTopRankIndustryNames(List<String> yearAndQuarterCodes,
-                                                                   List<String> marketSpaceCodes){
+    public ServiceIndustryNamesResponse getTopRankIndustryNames(List<String> yearAndQuarterCodes,
+                                                                List<String> marketSpaceCodes){
         List<MSAnalyticsWithIndustryAndStoreNumDto> results =
                 marketSpaceAnalyticsService.getMSAnalyticsWithTopRankIndustryNames(yearAndQuarterCodes, marketSpaceCodes);
 
         if(!results.isEmpty()){
-            return results.stream()
-                    .map(p-> ServiceIndustriesWthStoreNumResponse.builder()
-                            .serviceIndustryCodeName(p.getServiceIndustryCodeName())
-                            .build())
+            var list = results.stream()
+                    .map(p-> p.getServiceIndustryCodeName())
                     .collect(Collectors.toList());
+
+            return ServiceIndustryNamesResponse.builder()
+                    .serviceIndustryNames(list)
+                    .build();
         }
 
         return null;
     }
 
     @Transactional(readOnly = true)
-    public List<ServiceIndustriesWithLowCloseRateResponse> getLowCloseRateStoreIndustryNames(List<String> yearAndQuarterCodes,
-                                                                             List<String> marketSpaceCodes) {
+    public ServiceIndustryNamesResponse getLowCloseRateStoreIndustryNames(List<String> yearAndQuarterCodes,
+                                                                          List<String> marketSpaceCodes) {
         List<MSAnalyticsWithIndustryAndCloseRateDto> results =
                 marketSpaceAnalyticsService.getMSAnalyticsWithLowCloseRateIndustryNames(yearAndQuarterCodes, marketSpaceCodes);
 
         if(!results.isEmpty()){
-            return results.stream()
-                    .map(p-> ServiceIndustriesWithLowCloseRateResponse.builder()
-                            .serviceIndustryCodeName(p.getServiceIndustryCodeName())
-                            .build())
+            var list = results.stream()
+                    .map(p-> p.getServiceIndustryCodeName())
                     .collect(Collectors.toList());
+
+            return ServiceIndustryNamesResponse.builder()
+                    .serviceIndustryNames(list)
+                    .build();
         }
 
         return null;
