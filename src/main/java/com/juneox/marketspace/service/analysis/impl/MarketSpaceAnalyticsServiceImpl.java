@@ -5,7 +5,7 @@ import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStor
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
 import com.juneox.marketspace.domain.analysis.entity.MarketSpaceAnalytics;
-import com.juneox.marketspace.persistence.jdbc.AnalyticsJdbcRepository;
+import com.juneox.marketspace.persistence.jdbc.AnalyticsDAO;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceAnalyticsRepository;
 import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
@@ -23,7 +23,7 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
 
     private final MarketSpaceAnalyticsRepository marketSpaceAnalyticsRepository;
     private final AnalyticsQDSLRepository analyticsQDSLRepository;
-    private final AnalyticsJdbcRepository analyticsJdbcRepository;
+    private final AnalyticsDAO analyticsDAO;
 
     @Transactional
     @Override
@@ -51,7 +51,7 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
     @Transactional(readOnly = true)
     @Override
     public List<MSAnalyticsWithIndustryDto> getMSAnalyticsWithIndustryNames(List<String> yearAndQuarters) {
-        List<MSAnalyticsWithIndustryDto> results = analyticsJdbcRepository.findAllByYearAndQuarterCodes(yearAndQuarters);
+        List<MSAnalyticsWithIndustryDto> results = analyticsDAO.findAllByYearAndQuarterCodes(yearAndQuarters);
         return results;
     }
 

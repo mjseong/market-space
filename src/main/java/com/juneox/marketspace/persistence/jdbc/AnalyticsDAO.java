@@ -4,6 +4,6 @@ import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 
 import java.util.List;
 
-public interface AnalyticsJdbcRepository {
+public interface AnalyticsDAO {
     public List<MSAnalyticsWithIndustryDto> findAllByYearAndQuarterCodes(List<String> yearAndQuarterCodes);
 }

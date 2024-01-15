@@ -8,7 +8,7 @@ import com.juneox.marketspace.domain.analysis.entity.MarketSpaceAnalytics;
 import com.juneox.marketspace.domain.meta.entity.MarketSpace;
 import com.juneox.marketspace.domain.meta.entity.MarketSpaceGroup;
 import com.juneox.marketspace.domain.meta.entity.ServiceIndustry;
-import com.juneox.marketspace.persistence.jdbc.AnalyticsJdbcRepository;
+import com.juneox.marketspace.persistence.jdbc.AnalyticsDAO;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceAnalyticsRepository;
 import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
@@ -33,7 +33,7 @@ public class MarkSpaceAnalyticsServiceTests {
     MarketSpaceAnalyticsRepository marketSpaceAnalyticsRepository;
 
     @Mock
-    AnalyticsJdbcRepository analyticsJdbcRepository;
+    AnalyticsDAO analyticsJdbcRepository;
 
     @Mock
     AnalyticsQDSLRepository analyticsQDSLRepository;
