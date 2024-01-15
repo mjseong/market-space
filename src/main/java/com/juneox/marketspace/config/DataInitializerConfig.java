@@ -1,6 +1,6 @@
 package com.juneox.marketspace.config;
 
-import com.juneox.marketspace.web.facade.MetaDataFacadeService;
+import com.juneox.marketspace.app.facade.MetaDataFacadeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -17,7 +17,7 @@ public class DataInitializerConfig {
     @EventListener(ApplicationReadyEvent.class)
     public void loadData(){
         try{
-//            metaDataFacadeService.loadMarketSpaceDataFile("./sample/sample.csv");
+            metaDataFacadeService.loadMarketSpaceDataFile("./sample");
         }catch (RuntimeException re){
             log.error("load config init error: ", re);
         }

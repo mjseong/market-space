@@ -1,12 +1,12 @@
-package com.juneox.marketspace.web.facade;
+package com.juneox.marketspace.app.facade;
 
 import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
 import com.juneox.marketspace.domain.model.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
-import com.juneox.marketspace.web.response.ServiceIndustriesResponse;
-import com.juneox.marketspace.web.response.ServiceIndustriesWithLowCloseRateResponse;
-import com.juneox.marketspace.web.response.ServiceIndustriesWthStoreNumResponse;
+import com.juneox.marketspace.app.response.ServiceIndustriesResponse;
+import com.juneox.marketspace.app.response.ServiceIndustriesWithLowCloseRateResponse;
+import com.juneox.marketspace.app.response.ServiceIndustriesWthStoreNumResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,6 @@ public class MarketSpaceAnalyticsFacadeService {
         if(!results.isEmpty()) {
             return results.stream()
                     .map(p -> ServiceIndustriesResponse.builder()
-                            .serviceIndustryCode(p.getYearAndQuarterCode())
                             .serviceIndustryCodeName(p.getServiceIndustryCodeName())
                             .build())
                     .collect(Collectors.toList());
@@ -45,9 +44,7 @@ public class MarketSpaceAnalyticsFacadeService {
         if(!results.isEmpty()){
             return results.stream()
                     .map(p-> ServiceIndustriesWthStoreNumResponse.builder()
-                            .serviceIndustryCode(p.getYearAndQuarterCode())
                             .serviceIndustryCodeName(p.getServiceIndustryCodeName())
-                            .storesNumber(p.getStoresNumber())
                             .build())
                     .collect(Collectors.toList());
         }
@@ -64,9 +61,7 @@ public class MarketSpaceAnalyticsFacadeService {
         if(!results.isEmpty()){
             return results.stream()
                     .map(p-> ServiceIndustriesWithLowCloseRateResponse.builder()
-                            .serviceIndustryCode(p.getYearAndQuarterCode())
                             .serviceIndustryCodeName(p.getServiceIndustryCodeName())
-                            .bizCloseStoreRate(p.getBizCloseStoreRate())
                             .build())
                     .collect(Collectors.toList());
         }

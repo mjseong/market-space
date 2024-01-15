@@ -1,7 +1,7 @@
-package com.juneox.marketspace.web.controller.impl;
+package com.juneox.marketspace.app.controller.impl;
 
-import com.juneox.marketspace.web.controller.IMarketSpaceAnalyticsController;
-import com.juneox.marketspace.web.facade.MarketSpaceAnalyticsFacadeService;
+import com.juneox.marketspace.app.controller.IMarketSpaceAnalyticsController;
+import com.juneox.marketspace.app.facade.MarketSpaceAnalyticsFacadeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

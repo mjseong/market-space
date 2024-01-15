@@ -46,3 +46,13 @@ CREATE TABLE if not exists market_space_analytics(
     PRIMARY KEY(ms_analytics_id),
     UNIQUE KEY uidx_msanaly_multi (yaer_quarter_code, ms_group_id, ms_info_id, si_info_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE if not exists file_meta_info(
+    fm_info_id bigint NOT NULL AUTO_INCREMENT,
+    file_name varchar(255) NOT NULL,
+    file_hash_s256 varchar(150) NOT NULL,
+    created_at datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6) DEFAULT NULL,
+    PRIMARY KEY(fm_info_id),
+    UNIQUE KEY uidx_file_hs256(file_hash_s256)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

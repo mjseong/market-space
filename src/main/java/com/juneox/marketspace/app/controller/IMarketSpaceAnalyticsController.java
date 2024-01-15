@@ -1,4 +1,4 @@
-package com.juneox.marketspace.web.controller;
+package com.juneox.marketspace.app.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
