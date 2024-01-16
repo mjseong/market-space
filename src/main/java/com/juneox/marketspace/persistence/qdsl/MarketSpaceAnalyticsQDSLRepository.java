@@ -6,7 +6,7 @@ import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 
 import java.util.List;
 
-public interface AnalyticsQDSLRepository {
+public interface MarketSpaceAnalyticsQDSLRepository {
 
     public List<MSAnalyticsWithIndustryDto> findAllByYearQuarterCodes(List<String> yearAndQuarterCodes);
     public List<MSAnalyticsWithIndustryAndStoreNumDto> findAllTopRankByYearQuarterCodesAndMsCode(List<String> yearAndQuarterCodes,

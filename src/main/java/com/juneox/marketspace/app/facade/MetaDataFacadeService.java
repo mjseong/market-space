@@ -112,6 +112,7 @@ public class MetaDataFacadeService {
                                 .build())
                         .collect(Collectors.toList());
 
+                log.debug("load data start file: "+ fileMetaDto.getFileName());
                 marketSpaceAnalyticsService.createBulkMarketSpaceAnalytics(marketSpaceAnalyticsDtos);
                 completeRowCount =+ marketSpaceAnalyticsDtos.size();
 

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/marketspace?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC&cacheCallableStmts=true&autoReconnect=true
+    url: jdbc:mysql://localhost:3307/marketspace?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC&cacheCallableStmts=true&autoReconnect=true&rewriteBatchedStatements=true&profileSQL=false&logger=Slf4JLogger&maxQuerySizeToLog=20
     username: user
     password: password
     hikari:
