@@ -30,6 +30,7 @@ public class MarketSpaceGroup {
     @Column(name = "ms_group_code_name")
     String marketSpaceGroupCodeName;
 
+    @Builder.Default
     @Column(name = "created_at")
     @CreationTimestamp
     Instant createdAt = Instant.now();

@@ -28,6 +28,7 @@ public class FileMetaInfo {
     @Column(name = "file_hash_s256")
     String fileHashS256;
 
+    @Builder.Default
     @Column(name = "created_at")
     @CreationTimestamp
     Instant createdAt = Instant.now();

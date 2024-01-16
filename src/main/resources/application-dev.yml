@@ -27,4 +27,4 @@ logging:
 
 app:
   market-space:
-    file-store: ./sample
+    file-store: ./filestore

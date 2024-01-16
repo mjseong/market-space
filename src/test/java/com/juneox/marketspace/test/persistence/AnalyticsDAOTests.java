@@ -26,11 +26,11 @@ public class AnalyticsDAOTests {
     @Mock
     NamedParameterJdbcTemplate jdbcTemplate;
 
-    AnalyticsDAO analyticsDAO;
+    AnalyticsDAO mysqlAnalyticsDAO;
 
     @BeforeEach
     void init(){
-        this.analyticsDAO = new MysqlAnalyticsDAO(jdbcTemplate);
+        this.mysqlAnalyticsDAO = new MysqlAnalyticsDAO(jdbcTemplate);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class AnalyticsDAOTests {
         when(jdbcTemplate.query(anyString(), Mockito.any(Map.class), Mockito.any(RowMapper.class)))
                 .thenReturn(result);
 
-        List<MSAnalyticsWithIndustryDto> list = analyticsDAO.findAllByYearAndQuarterCodes(yearAndQuarterCodes);
+        List<MSAnalyticsWithIndustryDto> list = mysqlAnalyticsDAO.findAllByYearAndQuarterCodes(yearAndQuarterCodes);
 
         Assertions.assertEquals(result.get(0).getServiceIndustryCodeName(), list.get(0).getServiceIndustryCodeName());
     }

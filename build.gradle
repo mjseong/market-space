@@ -43,3 +43,26 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task copyJar(type: Copy){
+	from 'build/libs'
+	include '*.jar'
+
+	into './appbuild/'
+}
+
+task copyCustomDirectory(type: Copy){
+	from './sample'
+	into './appbuild/sample'
+}
+
+build.finalizedBy(copyJar, copyCustomDirectory)
+
+clean.doLast {
+	def appbuildDir = file('appbuild')
+
+	if (appbuildDir.exists()) {
+		println 'Cleaning appbuild directory'
+		appbuildDir.deleteDir()
+	}
+}

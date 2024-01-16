@@ -30,6 +30,7 @@ public class ServiceIndustry {
     @Column(name = "si_code_name")
     String serviceIndustryCodeName;
 
+    @Builder.Default
     @Column(name = "created_at")
     @CreationTimestamp
     Instant createdAt = Instant.now();
