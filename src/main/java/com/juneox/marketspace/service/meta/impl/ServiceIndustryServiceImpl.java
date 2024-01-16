@@ -54,6 +54,7 @@ public class ServiceIndustryServiceImpl implements ServiceIndustryService {
                         .serviceIndustryCodeName(serviceIndustryDto.getServiceIndustryCodeName())
                         .build())
                 .collect(Collectors.toList());
+
         serviceIndustryMap.putAll(
                 serviceIndustryRepository.saveAll(serviceIndustries).stream()
                         .collect(Collectors.toMap(p -> p.getServiceIndustryCode(), p1 -> p1))

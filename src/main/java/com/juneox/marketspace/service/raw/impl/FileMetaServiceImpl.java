@@ -19,6 +19,7 @@ public class FileMetaServiceImpl implements FileMetaService {
     private final FileMetaRepository fileMetaRepository;
 
     @Transactional(propagation = Propagation.REQUIRED)
+    @Override
     public void createFileMetas(List<FileMetaDto> fileMetaDtoList){
         List<FileMetaInfo> fileMetaInfos = fileMetaDtoList.stream()
                 .map(fileMetaDto -> FileMetaInfo.builder()
