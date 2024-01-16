@@ -33,7 +33,7 @@ public class MarkSpaceAnalyticsServiceTests {
     MarketSpaceAnalyticsRepository marketSpaceAnalyticsRepository;
 
     @Mock
-    AnalyticsDAO analyticsJdbcRepository;
+    AnalyticsDAO analyticsDAO;
 
     @Mock
     AnalyticsQDSLRepository analyticsQDSLRepository;
@@ -44,7 +44,7 @@ public class MarkSpaceAnalyticsServiceTests {
     void init(){
         this.marketSpaceAnalyticsService =
                 new MarketSpaceAnalyticsServiceImpl(
-                        marketSpaceAnalyticsRepository, analyticsQDSLRepository, analyticsJdbcRepository);
+                        marketSpaceAnalyticsRepository, analyticsQDSLRepository, analyticsDAO);
     }
 
     @Test
@@ -115,17 +115,15 @@ public class MarkSpaceAnalyticsServiceTests {
 
         List<MSAnalyticsWithIndustryDto> expectedList = Arrays.asList(
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20221")
                         .serviceIndustryCodeName("육류판매")
                         .build(),
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20222")
                         .serviceIndustryCodeName("수산물판매")
                         .build()
         );
 
         //when
-        Mockito.when(analyticsJdbcRepository.findAllByYearAndQuarterCodes(Mockito.any())).thenReturn(expectedList);
+        Mockito.when(analyticsDAO.findAllByYearAndQuarterCodes(Mockito.any())).thenReturn(expectedList);
         List<MSAnalyticsWithIndustryDto> actualList =
                 marketSpaceAnalyticsService.getMSAnalyticsWithIndustryNames(yearQuarter);
 
@@ -188,43 +186,25 @@ public class MarkSpaceAnalyticsServiceTests {
 
         List<MSAnalyticsWithIndustryAndCloseRateDto> expectedList = Arrays.asList(
                 MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20221")
-                        .serviceIndustryCodeName("육류판매")
-                        .bizCloseStoreRate(6)
                         .build(),
                 MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20221")
-                        .serviceIndustryCodeName("수산물판매")
-                        .bizCloseStoreRate(5)
                         .build(),
                 MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20221")
-                        .serviceIndustryCodeName("스포츠 강습")
-                        .bizCloseStoreRate(2)
                         .build(),
                 MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20222")
-                        .serviceIndustryCodeName("컴퓨터학원")
-                        .bizCloseStoreRate(1)
                         .build(),
                 MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20222")
-                        .serviceIndustryCodeName("동물병원")
-                        .bizCloseStoreRate(1)
                         .build()
         );
 
-        //DB에서 list 정렬해옴 따라서 결과값 asc 정렬해야함.
-        expectedList.sort(Comparator.comparingInt(MSAnalyticsWithIndustryAndCloseRateDto::getBizCloseStoreRate));
-
         //when
-        Mockito.when(analyticsQDSLRepository.findAllCloseRateByYearQuarterCodesAndMsCode(Mockito.any(), Mockito.any()))
+        Mockito.when(analyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(Mockito.any(), Mockito.any()))
                 .thenReturn(expectedList);
         List<MSAnalyticsWithIndustryAndCloseRateDto> actualList =
                 marketSpaceAnalyticsService.getMSAnalyticsWithLowCloseRateIndustryNames(yearQuarter, msCodes);
 
         //then
-        Assertions.assertEquals(2,
+        Assertions.assertEquals(5,
                 actualList.size());
     }
 }

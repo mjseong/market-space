@@ -2,6 +2,7 @@ package com.juneox.marketspace.app.facade;
 
 import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
 import com.juneox.marketspace.domain.exception.DataLoadFailureException;
+import com.juneox.marketspace.domain.exception.NotSupportFileFormatException;
 import com.juneox.marketspace.domain.meta.cache.MetaCacheStore;
 import com.juneox.marketspace.domain.meta.dto.MarketSpaceDto;
 import com.juneox.marketspace.domain.meta.dto.MarketSpaceGroupDto;
@@ -123,10 +124,18 @@ public class MetaDataFacadeService {
 
     //test 확인을 위해 private에서 public로 변경
     public List<MarketSpaceRawData> parseMarketSpaceCsv(String filePath){
-        List<List<String>> records = CsvUtils.readCsv(filePath);
+        List<List<String>> records;
+        try{
+             records = CsvUtils.readCsv(filePath);
+        }catch (RuntimeException e){
+            throw new NotSupportFileFormatException(e.getMessage());
+        };
 
         List<MarketSpaceRawData> rawData = records.stream().skip(1)
                 .map(row -> {
+                    if(row.size() != 14){
+                        throw new NotSupportFileFormatException("row size 14 higher or low file :"+ filePath + " size :"+ row.size());
+                    }
                     //cache yearAndQuarterCode
                     MetaCacheStore.getInstance().putYearAndQuarter(row.get(0));
 

@@ -4,6 +4,7 @@ import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndClos
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.domain.analysis.entity.QMarketSpaceAnalytics;
+import com.juneox.marketspace.domain.exception.NoSupportedException;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -22,15 +23,16 @@ public class AnalyticsQDSLRepositoryImpl implements AnalyticsQDSLRepository {
 
     @Override
     public List<MSAnalyticsWithIndustryDto> findAllByYearQuarterCodes(List<String> yearAndQuarterCodes){
-        QMarketSpaceAnalytics msa = QMarketSpaceAnalytics.marketSpaceAnalytics;
-
-        return jpaQueryFactory
-                .select(Projections.constructor(MSAnalyticsWithIndustryDto.class,
-                        msa.yearAndQuarterCode, msa.serviceIndustry.serviceIndustryCodeName))
-                .from(msa)
-                .where(msa.yearAndQuarterCode.in(yearAndQuarterCodes))
-                .groupBy(msa.yearAndQuarterCode, msa.serviceIndustry.serviceIndustryCodeName)
-                .fetch();
+        throw new NoSupportedException();
+//        QMarketSpaceAnalytics msa = QMarketSpaceAnalytics.marketSpaceAnalytics;
+//
+//        return jpaQueryFactory
+//                .select(Projections.constructor(MSAnalyticsWithIndustryDto.class,
+//                        msa.yearAndQuarterCode, msa.serviceIndustry.serviceIndustryCodeName))
+//                .from(msa)
+//                .where(msa.yearAndQuarterCode.in(yearAndQuarterCodes))
+//                .groupBy(msa.yearAndQuarterCode, msa.serviceIndustry.serviceIndustryCodeName)
+//                .fetch();
     }
 
     @Override
@@ -41,8 +43,8 @@ public class AnalyticsQDSLRepositoryImpl implements AnalyticsQDSLRepository {
 
         return jpaQueryFactory
                 .select(Projections.constructor(MSAnalyticsWithIndustryAndStoreNumDto.class,
-                        msa.yearAndQuarterCode,
                         msa.serviceIndustry.serviceIndustryCodeName,
+                        msa.yearAndQuarterCode,
                         msa.storesNumber))
                 .from(msa)
                 .where(msa.yearAndQuarterCode.in(yearAndQuarterCodes)
@@ -55,19 +57,20 @@ public class AnalyticsQDSLRepositoryImpl implements AnalyticsQDSLRepository {
     @Override
     public List<MSAnalyticsWithIndustryAndCloseRateDto> findAllCloseRateByYearQuarterCodesAndMsCode(List<String> yearAndQuarterCodes,
                                                                                                        List<String> marketSpaceCodes) {
+        throw new NoSupportedException();
 
-        QMarketSpaceAnalytics msa = QMarketSpaceAnalytics.marketSpaceAnalytics;
-
-        return jpaQueryFactory
-                .select(Projections.constructor(MSAnalyticsWithIndustryAndCloseRateDto.class,
-                        msa.yearAndQuarterCode,
-                        msa.serviceIndustry.serviceIndustryCodeName,
-                        msa.bizCloseStoreRate))
-                .from(msa)
-                .where(msa.yearAndQuarterCode.in(yearAndQuarterCodes)
-                        .and(msa.marketSpace.marketSpaceCode.in(marketSpaceCodes)))
-                .orderBy(msa.bizCloseStoreRate.asc())
-                .fetch();
+//        QMarketSpaceAnalytics msa = QMarketSpaceAnalytics.marketSpaceAnalytics;
+//
+//        return jpaQueryFactory
+//                .select(Projections.constructor(MSAnalyticsWithIndustryAndCloseRateDto.class,
+//                        msa.yearAndQuarterCode,
+//                        msa.serviceIndustry.serviceIndustryCodeName,
+//                        msa.bizCloseStoreRate))
+//                .from(msa)
+//                .where(msa.yearAndQuarterCode.in(yearAndQuarterCodes)
+//                        .and(msa.marketSpace.marketSpaceCode.in(marketSpaceCodes)))
+//                .orderBy(msa.bizCloseStoreRate.asc())
+//                .fetch();
     }
 
     /**

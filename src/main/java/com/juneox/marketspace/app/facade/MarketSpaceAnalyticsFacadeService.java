@@ -1,5 +1,6 @@
 package com.juneox.marketspace.app.facade;
 
+import com.juneox.marketspace.app.response.ServiceIndustriesWithLowCloseRateResponse;
 import com.juneox.marketspace.app.response.ServiceIndustryNamesResponse;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
@@ -55,19 +56,21 @@ public class MarketSpaceAnalyticsFacadeService {
     }
 
     @Transactional(readOnly = true)
-    public ServiceIndustryNamesResponse getLowCloseRateStoreIndustryNames(List<String> yearAndQuarterCodes,
-                                                                          List<String> marketSpaceCodes) {
+    public List<ServiceIndustriesWithLowCloseRateResponse> getLowCloseRateStoreIndustryNames(List<String> yearAndQuarterCodes,
+                                                                                       List<String> marketSpaceCodes) {
         List<MSAnalyticsWithIndustryAndCloseRateDto> results =
                 marketSpaceAnalyticsService.getMSAnalyticsWithLowCloseRateIndustryNames(yearAndQuarterCodes, marketSpaceCodes);
 
         if(!results.isEmpty()){
-            var list = results.stream()
-                    .map(p-> p.getServiceIndustryCodeName())
+            return results.stream()
+                    .map(p-> ServiceIndustriesWithLowCloseRateResponse.builder()
+                            .yearAndQuarter(p.getYearAndQuarterCode())
+                            .marketSpaceCode(p.getMarketSpaceCode())
+                            .serviceIndustryCodeName(p.getServiceIndustryCodeName())
+                            .bizCloseStoreRate(p.getBizCloseStoreRate())
+                            .build()
+                    )
                     .collect(Collectors.toList());
-
-            return ServiceIndustryNamesResponse.builder()
-                    .serviceIndustryNames(list)
-                    .build();
         }
 
         return null;

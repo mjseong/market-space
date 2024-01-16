@@ -2,6 +2,7 @@ package com.juneox.marketspace.test.app;
 
 import com.juneox.marketspace.app.facade.MetaDataFacadeService;
 import com.juneox.marketspace.domain.exception.DataLoadFailureException;
+import com.juneox.marketspace.domain.exception.NotSupportFileFormatException;
 import com.juneox.marketspace.domain.meta.cache.MetaCacheStore;
 import com.juneox.marketspace.domain.meta.dto.MarketSpaceDto;
 import com.juneox.marketspace.domain.meta.dto.MarketSpaceGroupDto;
@@ -12,7 +13,6 @@ import com.juneox.marketspace.service.meta.MarketSpaceService;
 import com.juneox.marketspace.service.meta.ServiceIndustryService;
 import com.juneox.marketspace.service.raw.FileMetaService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -91,6 +91,20 @@ public class MetaDataFacadeServiceTests {
     void loadDirFailTest(){
         Assertions.assertThrows(DataLoadFailureException.class, ()->{
             metaDataFacadeService.loadMarketSpaceDataFile("./sample1");
+        });
+    }
+
+    @Test
+    void loadCsvFailTest(){
+        Assertions.assertThrows(NotSupportFileFormatException.class, ()->{
+            metaDataFacadeService.parseMarketSpaceCsv("./sample_fail/samplefail.csv");
+        });
+    }
+
+    @Test
+    void loadCsvNotFileTest(){
+        Assertions.assertThrows(NotSupportFileFormatException.class, ()->{
+            metaDataFacadeService.parseMarketSpaceCsv("./sample_fail/sample.txt");
         });
     }
 }

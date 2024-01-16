@@ -1,6 +1,7 @@
 package com.juneox.marketspace.test.app;
 
 import com.juneox.marketspace.app.facade.MarketSpaceAnalyticsFacadeService;
+import com.juneox.marketspace.app.response.ServiceIndustriesWithLowCloseRateResponse;
 import com.juneox.marketspace.app.response.ServiceIndustryNamesResponse;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
@@ -36,11 +37,11 @@ public class MarketSpaceAnalyticsFacadeServiceTests {
         //given
         List<MSAnalyticsWithIndustryDto> resultDto = Arrays.asList(
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20221").serviceIndustryCodeName("청과상").build(),
+                        .serviceIndustryCodeName("청과상").build(),
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20221").serviceIndustryCodeName("육류판매").build(),
+                        .serviceIndustryCodeName("육류판매").build(),
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20222").serviceIndustryCodeName("핸드폰").build()
+                        .serviceIndustryCodeName("핸드폰").build()
         );
 
         BDDMockito.given(marketSpaceAnalyticsService.getMSAnalyticsWithIndustryNames(Mockito.any()))
@@ -96,13 +97,13 @@ public class MarketSpaceAnalyticsFacadeServiceTests {
                 .willReturn(resultDto);
 
         //when
-        ServiceIndustryNamesResponse response =
+        List<ServiceIndustriesWithLowCloseRateResponse> response =
                 marketSpaceAnalyticsFacadeService.getLowCloseRateStoreIndustryNames(Arrays.asList("20221","20222"),
                         Arrays.asList("3110024","3110025"));
 
         //then
         Assertions.assertEquals(List.of("청과상","육류판매","핸드폰").get(0),
-                response.getServiceIndustryNames().get(0));
+                response.get(0).getServiceIndustryCodeName());
     }
 
 }

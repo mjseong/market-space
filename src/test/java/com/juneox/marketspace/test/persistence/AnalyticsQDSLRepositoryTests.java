@@ -3,6 +3,7 @@ package com.juneox.marketspace.test.persistence;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
 import com.juneox.marketspace.domain.analysis.entity.QMarketSpaceAnalytics;
+import com.juneox.marketspace.domain.exception.NoSupportedException;
 import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
 import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepositoryImpl;
 import com.querydsl.core.types.Projections;
@@ -77,8 +78,8 @@ public class AnalyticsQDSLRepositoryTests {
 
         BDDMockito.given(jpaQueryFactory.select(
                 Projections.constructor(MSAnalyticsWithIndustryAndStoreNumDto.class,
-                msa.yearAndQuarterCode,
                 msa.serviceIndustry.serviceIndustryCodeName,
+                msa.yearAndQuarterCode,
                 msa.storesNumber))).willReturn(step1);
 
         BDDMockito.given(step1.from(msa)).willReturn(step2);
@@ -105,62 +106,9 @@ public class AnalyticsQDSLRepositoryTests {
         List<String> yearAndQuarterCodes = Arrays.asList("20221","20222");
         List<String> marketSpaceCodes = Arrays.asList("3110024","3110025");
 
-        List<MSAnalyticsWithIndustryAndCloseRateDto> expectedList = Arrays.asList(
-                MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20221")
-                        .serviceIndustryCodeName("육류판매")
-                        .bizCloseStoreRate(1)
-                        .build(),
-                MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20221")
-                        .serviceIndustryCodeName("수산물판매")
-                        .bizCloseStoreRate(1)
-                        .build(),
-                MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20221")
-                        .serviceIndustryCodeName("스포츠 강습")
-                        .bizCloseStoreRate(3)
-                        .build(),
-                MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20222")
-                        .serviceIndustryCodeName("컴퓨터학원")
-                        .bizCloseStoreRate(4)
-                        .build(),
-                MSAnalyticsWithIndustryAndCloseRateDto.builder()
-                        .yearAndQuarterCode("20222")
-                        .serviceIndustryCodeName("동물병원")
-                        .bizCloseStoreRate(8)
-                        .build()
-        );
-
-        QMarketSpaceAnalytics msa = QMarketSpaceAnalytics.marketSpaceAnalytics;
-
-        JPAQuery step1 = mock(JPAQuery.class);
-        JPAQuery step2 = mock(JPAQuery.class);
-        JPAQuery step3 = mock(JPAQuery.class);
-        JPAQuery step4 = mock(JPAQuery.class);
-
-        BDDMockito.given(jpaQueryFactory
-                .select(Projections.constructor(MSAnalyticsWithIndustryAndCloseRateDto.class,
-                        msa.yearAndQuarterCode,
-                        msa.serviceIndustry.serviceIndustryCodeName,
-                        msa.bizCloseStoreRate))).willReturn(step1);
-
-        BDDMockito.given(step1.from(msa)).willReturn(step2);
-
-        BDDMockito.given(step2.where(msa.yearAndQuarterCode.in(yearAndQuarterCodes)
-                .and(msa.marketSpace.marketSpaceCode.in(marketSpaceCodes)))).willReturn(step3);
-
-        BDDMockito.given(step3.orderBy(msa.bizCloseStoreRate.asc())).willReturn(step4);
-
-        BDDMockito.given(step4.fetch()).willReturn(expectedList);
-
-        //when
-        List<MSAnalyticsWithIndustryAndCloseRateDto> actualList =
-        analyticsQDSLRepository.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarterCodes, marketSpaceCodes);
-
-        //then
-        Assertions.assertEquals(expectedList.size(), actualList.size());
+        Assertions.assertThrows(NoSupportedException.class, ()->{
+            analyticsQDSLRepository.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarterCodes, marketSpaceCodes);
+        });
     }
 
 

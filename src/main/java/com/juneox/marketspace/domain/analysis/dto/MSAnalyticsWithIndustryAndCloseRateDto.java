@@ -7,10 +7,14 @@ import lombok.experimental.SuperBuilder;
 @Getter
 public class MSAnalyticsWithIndustryAndCloseRateDto extends MSAnalyticsWithIndustryDto {
 
+    private String yearAndQuarterCode;
+    private String marketSpaceCode;
     private int bizCloseStoreRate;
 
-    public MSAnalyticsWithIndustryAndCloseRateDto(String yearAndQuarterCode, String serviceIndustryCodeName, int bizCloseStoreRate) {
-        super(yearAndQuarterCode, serviceIndustryCodeName);
+    public MSAnalyticsWithIndustryAndCloseRateDto(String serviceIndustryCodeName, String yearAndQuarterCode, String marketSpaceCode, int bizCloseStoreRate) {
+        super(serviceIndustryCodeName);
+        this.yearAndQuarterCode = yearAndQuarterCode;
+        this.marketSpaceCode = marketSpaceCode;
         this.bizCloseStoreRate = bizCloseStoreRate;
     }
 }

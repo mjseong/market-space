@@ -39,11 +39,11 @@ public class AnalyticsDAOTests {
         List<String> yearAndQuarterCodes = Arrays.asList("20221","20222");
         List<MSAnalyticsWithIndustryDto> result = List.of(
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20221").serviceIndustryCodeName("육류판매").build(),
+                        .serviceIndustryCodeName("육류판매").build(),
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20221").serviceIndustryCodeName("수산물판매").build(),
+                        .serviceIndustryCodeName("수산물판매").build(),
                 MSAnalyticsWithIndustryDto.builder()
-                        .yearAndQuarterCode("20222").serviceIndustryCodeName("스포츠 강습").build()
+                        .serviceIndustryCodeName("스포츠 강습").build()
         );
 
         when(jdbcTemplate.query(anyString(), Mockito.any(Map.class), Mockito.any(RowMapper.class)))

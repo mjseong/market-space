@@ -78,22 +78,22 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
     @Override
     public List<MSAnalyticsWithIndustryAndCloseRateDto> getMSAnalyticsWithLowCloseRateIndustryNames(List<String> yearAndQuarters, List<String> marketSpaceCodes) {
 
-        List<MSAnalyticsWithIndustryAndCloseRateDto> results =
-                analyticsQDSLRepository.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
+        List<MSAnalyticsWithIndustryAndCloseRateDto> topLowCloseRateIndustries =
+                analyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
 
-        List<MSAnalyticsWithIndustryAndCloseRateDto> topLowCloseRateIndustries = new ArrayList<>();
-
-        if(!results.isEmpty()){
-            int topLowCloseRate = results.get(0).getBizCloseStoreRate();
-
-            for(MSAnalyticsWithIndustryAndCloseRateDto dto: results) {
-                if (dto.getBizCloseStoreRate() == topLowCloseRate) {
-                    topLowCloseRateIndustries.add(dto);
-                } else {
-                    break;
-                }
-            };
-        }
+//        List<MSAnalyticsWithIndustryAndCloseRateDto> topLowCloseRateIndustries = new ArrayList<>();
+//
+//        if(!results.isEmpty()){
+//            int topLowCloseRate = results.get(0).getBizCloseStoreRate();
+//
+//            for(MSAnalyticsWithIndustryAndCloseRateDto dto: results) {
+//                if (dto.getBizCloseStoreRate() == topLowCloseRate) {
+//                    topLowCloseRateIndustries.add(dto);
+//                } else {
+//                    break;
+//                }
+//            };
+//        }
 
         return topLowCloseRateIndustries;
     }

@@ -7,11 +7,9 @@ import lombok.experimental.SuperBuilder;
 @Getter
 public class MSAnalyticsWithIndustryDto {
 
-    private String yearAndQuarterCode;
     private String serviceIndustryCodeName;
 
-    public MSAnalyticsWithIndustryDto(String yearAndQuarterCode, String serviceIndustryCodeName) {
-        this.yearAndQuarterCode = yearAndQuarterCode;
+    public MSAnalyticsWithIndustryDto(String serviceIndustryCodeName) {
         this.serviceIndustryCodeName = serviceIndustryCodeName;
     }
 
