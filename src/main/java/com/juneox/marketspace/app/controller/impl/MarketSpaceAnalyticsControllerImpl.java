@@ -1,6 +1,6 @@
 package com.juneox.marketspace.app.controller.impl;
 
-import com.juneox.marketspace.app.controller.IMarketSpaceAnalyticsController;
+import com.juneox.marketspace.app.controller.MarketSpaceAnalyticsController;
 import com.juneox.marketspace.app.facade.MarketSpaceAnalyticsFacadeService;
 import com.juneox.marketspace.domain.exception.CommonException;
 import com.juneox.marketspace.domain.exception.type.ErrorMessageType;
@@ -17,11 +17,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/ms-analytics/v1")
 @RestController
-public class MarketSpaceAnalyticsController implements IMarketSpaceAnalyticsController {
+public class MarketSpaceAnalyticsControllerImpl implements MarketSpaceAnalyticsController {
 
     private final MarketSpaceAnalyticsFacadeService marketSpaceAnalyticsFacadeService;
 
     @GetMapping("/service-industries")
+    @Override
     public ResponseEntity getIndustryNames(@RequestParam(name = "year_quarter")List<String> yearAndQuarterCode){
         //validation check
         this.validationYearAndQuarterCode(yearAndQuarterCode);
@@ -31,6 +32,7 @@ public class MarketSpaceAnalyticsController implements IMarketSpaceAnalyticsCont
     }
 
     @GetMapping("/service-industries/top-rank")
+    @Override
     public ResponseEntity getTopRankStores(@RequestParam(name = "year_quarter")List<String> yearAndQuarterCode,
                                            @RequestParam(name = "market_space_code")List<String> marketSpaceCode){
         //validation check
@@ -42,6 +44,7 @@ public class MarketSpaceAnalyticsController implements IMarketSpaceAnalyticsCont
     }
 
     @GetMapping("/service-industries/low-close-rate")
+    @Override
     public ResponseEntity getLowCloseRateStores(@RequestParam(name = "year_quarter")List<String> yearAndQuarterCode,
                                                 @RequestParam(name = "market_space_code")List<String> marketSpaceCode){
         //validation check
