@@ -28,3 +28,4 @@ logging:
 app:
   market-space:
     file-store: ./sample
+    batch-size: 1000
