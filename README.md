@@ -23,7 +23,6 @@ ERD를 작성하면 정규화하면 4개의 테이블로 분리됩니다. 추가
 *ERD*
 ![markspace-erd.png](document%2Fmarkspace-erd.png)
 
-## 
 
 ## Requirements
 * Java 21
@@ -78,5 +77,7 @@ java -jar appbuild/market-space-1.0.0.jar --spring.profiles.active=dev --app.mar
   * 한글 깨짐 증상이 있어 ms-excel으로 utf-8 csv로 변환하여 filestore폴더에 넣음.
 * arm cpu환경으로 인해 docker-compose mysql container 이미지를 x86 cpu로 변경해야할 수 있음.
   * docker-compose 파일내에서 image: amd64/mysql:8.0.31 값으로 변경
+* 일부 결과를 위해 QueryDSL을 사용하지 않고 JDBC를 사용하여 조회기능 대체
+  * inline subQuery 미지원과 RDB에서 지원하는 native함수를 이용하여 Query튜닝함.
 
 
