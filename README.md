@@ -33,11 +33,12 @@ ERD를 작성하면 정규화하면 4개의 테이블로 분리됩니다. 추가
 ## Setup
 ### 1. Docker compose run & down
 ```sh
+cd ~/<computer_home>/git/market-space
 cd ops
 
 docker-compose up -d
 
-docker-compose down
+docker-compose down --volumn
 ```
 ### 2. Project build
 ```sh
