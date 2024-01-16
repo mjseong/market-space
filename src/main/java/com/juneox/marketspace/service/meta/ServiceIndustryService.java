@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface ServiceIndustryService {
 
+    public List<ServiceIndustry> getServiceIndustry();
     public ServiceIndustry createServiceIndustry(ServiceIndustryDto serviceIndustryDto);
     public Map<String, ServiceIndustry> createBulkServiceIndustry(List<ServiceIndustryDto> serviceIndustryDtos);
     public ServiceIndustry modifyServiceIndustry();

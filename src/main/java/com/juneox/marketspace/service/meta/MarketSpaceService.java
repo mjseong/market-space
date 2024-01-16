@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface MarketSpaceService {
 
+    public List<MarketSpace> getMarketSpaces();
     public MarketSpace createMarketSpace(MarketSpaceDto marketSpaceDto);
     public Map<String, MarketSpace> createBulkMarketSpace(List<MarketSpaceDto> marketSpaceDtos);
     public MarketSpace modifyMarketSpace();

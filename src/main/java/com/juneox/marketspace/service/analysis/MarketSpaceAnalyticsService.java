@@ -6,10 +6,14 @@ import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MarketSpaceAnalyticsService {
 
     public void createBulkMarketSpaceAnalytics(List<MarketSpaceAnalyticsDto> marketSpaceAnalyticsDtos);
+
+    public Set<String> getDistinctYearAndQuarterCode();
+
     public List<MSAnalyticsWithIndustryDto> getMSAnalyticsWithIndustryNames(List<String> yearAndQuarters);
     public List<MSAnalyticsWithIndustryAndStoreNumDto> getMSAnalyticsWithTopRankIndustryNames(List<String> yearAndQuarters,
                                                                                               List<String> marketSpaceCodes);

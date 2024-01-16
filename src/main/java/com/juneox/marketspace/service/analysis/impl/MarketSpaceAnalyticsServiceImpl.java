@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -46,6 +47,15 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
                 .collect(Collectors.toList());
 
         marketSpaceAnalyticsRepository.saveAll(marketSpaceAnalytics);
+    }
+
+    @Override
+    public Set<String> getDistinctYearAndQuarterCode() {
+        List<String> distinctYearAndQuarterCode =
+                marketSpaceAnalyticsRepository.findAllByDistinctYearAndQuarterCode();
+
+        return distinctYearAndQuarterCode.stream()
+                .collect(Collectors.toSet());
     }
 
     @Transactional(readOnly = true)

@@ -13,7 +13,8 @@ public enum ErrorMessageType {
     NOT_FOUND(10001, "Not found information", HttpStatus.NOT_FOUND),
     UNAUTHORIZED(10002, "Unauthorized", HttpStatus.UNAUTHORIZED),
     FORBIDDEN(10003,"Forbidden", HttpStatus.FORBIDDEN),
-    NOT_IMPLEMENTED(10004, "Not Implemented feature", HttpStatus.NOT_IMPLEMENTED);
+    NOT_IMPLEMENTED(10004, "Not Implemented feature", HttpStatus.NOT_IMPLEMENTED),
+    INVALID_REQUEST(10051, "Invalid request", HttpStatus.BAD_REQUEST);
 
     @Getter
     Integer code;

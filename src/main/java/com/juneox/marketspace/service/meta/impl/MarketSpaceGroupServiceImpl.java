@@ -24,7 +24,13 @@ public class MarketSpaceGroupServiceImpl implements MarketSpaceGroupService {
 
     @Override
     public MarketSpaceGroup getMarketSpaceGroup() {
-        return null;
+        throw new NoSupportedException();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<MarketSpaceGroup> getMarketSpaceGroups() {
+        return marketSpaceGroupRepository.findAll();
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

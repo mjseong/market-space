@@ -22,6 +22,12 @@ public class MarketSpaceServiceImpl implements MarketSpaceService {
 
     private final MarketSpaceRepository marketSpaceRepository;
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<MarketSpace> getMarketSpaces() {
+        return marketSpaceRepository.findAll();
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public MarketSpace createMarketSpace(MarketSpaceDto marketSpaceDto) {

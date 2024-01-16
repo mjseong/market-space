@@ -22,6 +22,12 @@ public class ServiceIndustryServiceImpl implements ServiceIndustryService {
 
     private final ServiceIndustryRepository serviceIndustryRepository;
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<ServiceIndustry> getServiceIndustry() {
+        return serviceIndustryRepository.findAll();
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public ServiceIndustry createServiceIndustry(ServiceIndustryDto serviceIndustryDto) {

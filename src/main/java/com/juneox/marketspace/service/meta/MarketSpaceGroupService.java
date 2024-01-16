@@ -9,6 +9,7 @@ import java.util.Map;
 public interface MarketSpaceGroupService {
 
     public MarketSpaceGroup getMarketSpaceGroup();
+    public List<MarketSpaceGroup> getMarketSpaceGroups();
 
     public MarketSpaceGroup createMarketSpaceGroup(MarketSpaceGroupDto marketSpaceGroupDto);
     public Map<String, MarketSpaceGroup> createBulkMarketSpaceGroup(List<MarketSpaceGroupDto> marketSpaceGroupDtos);

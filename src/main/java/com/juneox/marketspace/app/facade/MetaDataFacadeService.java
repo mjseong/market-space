@@ -1,6 +1,7 @@
 package com.juneox.marketspace.app.facade;
 
 import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
+import com.juneox.marketspace.domain.exception.DataLoadFailureException;
 import com.juneox.marketspace.domain.meta.cache.MetaCacheStore;
 import com.juneox.marketspace.domain.meta.dto.MarketSpaceDto;
 import com.juneox.marketspace.domain.meta.dto.MarketSpaceGroupDto;
@@ -40,7 +41,28 @@ public class MetaDataFacadeService {
     private final MarketSpaceAnalyticsService marketSpaceAnalyticsService;
     private final FileMetaService fileMetaService;
 
-    public void loadMarketSpaceDataFile(String directoryPath){
+    public void initDataCache(){
+        MetaCacheStore metaCacheStore = MetaCacheStore.getInstance();
+
+        metaCacheStore.putAllYearAndQuarterCode(
+                marketSpaceAnalyticsService.getDistinctYearAndQuarterCode()
+        );
+
+        metaCacheStore.putAllMarketSpaceGroup(
+                marketSpaceGroupService.getMarketSpaceGroups()
+        );
+
+        metaCacheStore.putAllMarketSpace(
+                marketSpaceService.getMarketSpaces()
+        );
+
+        metaCacheStore.putAllServiceIndustry(
+                serviceIndustryService.getServiceIndustry()
+        );
+    }
+
+    public long loadMarketSpaceDataFile(String directoryPath){
+        long completeRowCount = 0L;
 
         //find directories file
         List<FileMetaInfo> fileMetas = fileMetaService.getFileMetas();
@@ -86,19 +108,28 @@ public class MetaDataFacadeService {
                                 .bizCloseStoreRate(p.getBizCloseStoreRate())
                                 .bizCloseStoreNumber(p.getBizCloseStoreNumber())
                                 .franchiseStoreNumber(p.getFranchiseStoreNumber())
-                                .build()).collect(Collectors.toList());
+                                .build())
+                        .collect(Collectors.toList());
 
                 marketSpaceAnalyticsService.createBulkMarketSpaceAnalytics(marketSpaceAnalyticsDtos);
+                completeRowCount =+ marketSpaceAnalyticsDtos.size();
+
                 log.debug("load data completed file: "+ fileMetaDto.getFileName());
                 fileMetaService.createFileMeta(fileMetaDto);
             }
         }
+        return completeRowCount;
     }
-    private List<MarketSpaceRawData> parseMarketSpaceCsv(String filePath){
+
+    //test 확인을 위해 private에서 public로 변경
+    public List<MarketSpaceRawData> parseMarketSpaceCsv(String filePath){
         List<List<String>> records = CsvUtils.readCsv(filePath);
 
         List<MarketSpaceRawData> rawData = records.stream().skip(1)
                 .map(row -> {
+                    //cache yearAndQuarterCode
+                    MetaCacheStore.getInstance().putYearAndQuarter(row.get(0));
+
                     //cache marketSpaceGroupDto
                     MetaCacheStore.getInstance().putMarketSpaceGroupDto(MarketSpaceGroupDto.builder()
                                     .marketSpaceGroupCode(row.get(1))
@@ -145,7 +176,7 @@ public class MetaDataFacadeService {
 
             return fileMetaDtoList;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new DataLoadFailureException(e);
         }
     }
 
@@ -158,9 +189,9 @@ public class MetaDataFacadeService {
                     try {
                         hashValue = HashUtils.getHashS256WithFile(path);
                     } catch (NoSuchAlgorithmException e) {
-                        throw new RuntimeException(e);
+                        throw new DataLoadFailureException(e);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new DataLoadFailureException(e);
                     }
                     return FileMetaDto.builder()
                             .fileName(fileName)
@@ -173,7 +204,4 @@ public class MetaDataFacadeService {
 
         return fileMetaDtos;
     }
-
-
-
 }
