@@ -81,20 +81,6 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
         List<MSAnalyticsWithIndustryAndCloseRateDto> topLowCloseRateIndustries =
                 analyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
 
-//        List<MSAnalyticsWithIndustryAndCloseRateDto> topLowCloseRateIndustries = new ArrayList<>();
-//
-//        if(!results.isEmpty()){
-//            int topLowCloseRate = results.get(0).getBizCloseStoreRate();
-//
-//            for(MSAnalyticsWithIndustryAndCloseRateDto dto: results) {
-//                if (dto.getBizCloseStoreRate() == topLowCloseRate) {
-//                    topLowCloseRateIndustries.add(dto);
-//                } else {
-//                    break;
-//                }
-//            };
-//        }
-
         return topLowCloseRateIndustries;
     }
 }
