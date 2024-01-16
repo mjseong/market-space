@@ -81,4 +81,10 @@ java -jar appbuild/market-space-1.0.0.jar --spring.profiles.active=dev --app.mar
 * 일부 결과를 위해 QueryDSL을 사용하지 않고 JDBC를 사용하여 조회기능 대체
   * inline subQuery 미지원과 RDB에서 지원하는 native함수를 이용하여 Query튜닝함.
 
+## Change History
+* MarketSpaceAnalytics 데이터 bulk insert시에 JPA에서 JDBC로 변경
+  * 50만건 6분에서 30초로 개선
+* 조회 API의 ORM Query개선을 위해 JDBC를 활용 native Query로 튜닝
+  * ORM query 140ms에서 native Query 76ms 개선
+
 
