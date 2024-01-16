@@ -10,7 +10,7 @@ spring:
       maximum-pool-size: 10
   jpa:
     generate-ddl: false
-    show-sql: true
+    show-sql: false
     properties:
       format_sql: true
     hibernate:
@@ -27,4 +27,4 @@ logging:
 
 app:
   market-space:
-    file-store: ./filestore
+    file-store:
