@@ -13,6 +13,7 @@ import com.juneox.marketspace.service.meta.MarketSpaceService;
 import com.juneox.marketspace.service.meta.ServiceIndustryService;
 import com.juneox.marketspace.service.raw.FileMetaService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +51,14 @@ public class MetaDataFacadeServiceTests {
     @MockBean
     FileMetaService fileMetaService;
 
+    @BeforeEach
+    void init(){
+        MetaCacheStore.getInstance().getMarketSpaceGroupDtoMap().clear();
+        MetaCacheStore.getInstance().getMarketSpaceDtoMap().clear();
+        MetaCacheStore.getInstance().getServiceIndustryDtoMap().clear();
+    }
+
+    @Transactional
     @Test
     void sampleDataMetaCacheTest(){
         //given
@@ -73,6 +83,7 @@ public class MetaDataFacadeServiceTests {
         Assertions.assertEquals(43, siList.size());
     }
 
+    @Transactional
     @Test
     void loadDataTest(){
         //given

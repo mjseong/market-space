@@ -2,10 +2,8 @@ package com.juneox.marketspace.domain.exception;
 
 import com.juneox.marketspace.domain.exception.type.ErrorMessageType;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-@NoArgsConstructor
 public class CommonException extends RuntimeException{
 
     @Getter

@@ -5,6 +5,8 @@ import com.juneox.marketspace.app.response.ServiceIndustryNamesResponse;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
+import com.juneox.marketspace.domain.exception.CommonException;
+import com.juneox.marketspace.domain.exception.type.ErrorMessageType;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,9 +33,9 @@ public class MarketSpaceAnalyticsFacadeService {
             return ServiceIndustryNamesResponse.builder()
                     .serviceIndustryNames(list)
                     .build();
+        }else{
+            throw new CommonException(ErrorMessageType.NOT_FOUND);
         }
-
-        return null;
     }
 
     @Transactional(readOnly = true)
@@ -50,9 +52,9 @@ public class MarketSpaceAnalyticsFacadeService {
             return ServiceIndustryNamesResponse.builder()
                     .serviceIndustryNames(list)
                     .build();
+        }else{
+            throw new CommonException(ErrorMessageType.NOT_FOUND);
         }
-
-        return null;
     }
 
     @Transactional(readOnly = true)
@@ -71,9 +73,9 @@ public class MarketSpaceAnalyticsFacadeService {
                             .build()
                     )
                     .collect(Collectors.toList());
+        }else{
+            throw new CommonException(ErrorMessageType.NOT_FOUND);
         }
-
-        return null;
     }
 
 }
