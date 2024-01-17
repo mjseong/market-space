@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class AnalyticsQDSLRepositoryImpl implements AnalyticsQDSLRepository {
+public class MarketSpaceAnalyticsQDSLRepositoryImpl implements MarketSpaceAnalyticsQDSLRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override

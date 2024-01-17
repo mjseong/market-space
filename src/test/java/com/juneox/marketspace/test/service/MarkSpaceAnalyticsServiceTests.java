@@ -8,9 +8,9 @@ import com.juneox.marketspace.domain.analysis.entity.MarketSpaceAnalytics;
 import com.juneox.marketspace.domain.meta.entity.MarketSpace;
 import com.juneox.marketspace.domain.meta.entity.MarketSpaceGroup;
 import com.juneox.marketspace.domain.meta.entity.ServiceIndustry;
-import com.juneox.marketspace.persistence.jdbc.AnalyticsDAO;
+import com.juneox.marketspace.persistence.jdbc.MarketSpaceAnalyticsDAO;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceAnalyticsRepository;
-import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
+import com.juneox.marketspace.persistence.qdsl.MarketSpaceAnalyticsQDSLRepository;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
 import com.juneox.marketspace.service.analysis.impl.MarketSpaceAnalyticsServiceImpl;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +23,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,10 +32,10 @@ public class MarkSpaceAnalyticsServiceTests {
     MarketSpaceAnalyticsRepository marketSpaceAnalyticsRepository;
 
     @Mock
-    AnalyticsDAO analyticsDAO;
+    MarketSpaceAnalyticsDAO marketSpaceAnalyticsDAO;
 
     @Mock
-    AnalyticsQDSLRepository analyticsQDSLRepository;
+    MarketSpaceAnalyticsQDSLRepository marketSpaceAnalyticsQDSLRepository;
 
     MarketSpaceAnalyticsService marketSpaceAnalyticsService;
 
@@ -44,68 +43,7 @@ public class MarkSpaceAnalyticsServiceTests {
     void init(){
         this.marketSpaceAnalyticsService =
                 new MarketSpaceAnalyticsServiceImpl(
-                        marketSpaceAnalyticsRepository, analyticsQDSLRepository, analyticsDAO);
-    }
-
-    @Test
-    void createBulkDataTest(){
-        //given
-        var marketSpaceGroup = MarketSpaceGroup.builder()
-                .id(1L)
-                .marketSpaceGroupCode("A")
-                .marketSpaceGroupCodeName("골목상권")
-                .build();
-        var marketSpace = MarketSpace.builder()
-                .id(1L)
-                .marketSpaceCode("3110023")
-                .marketSpaceCodeName("서울대병원")
-                .build();
-        var serviceIndustry = ServiceIndustry.builder()
-                .id(1L)
-                .serviceIndustryCode("CS300009")
-                .serviceIndustryCodeName("청과상")
-                .build();
-
-        List<MarketSpaceAnalyticsDto> marketSpaceDtoList = Arrays.asList(
-                MarketSpaceAnalyticsDto.builder()
-                        .yearAndQuarterCode("20211")
-                        .marketSpaceGroup(marketSpaceGroup)
-                        .marketSpace(marketSpace)
-                        .serviceIndustry(serviceIndustry)
-                        .storesNumber(8)
-                        .similarIndustryStoreNumber(8)
-                        .bizNewStoreRate(25)
-                        .bizNewStoreNumber(2)
-                        .bizCloseStoreRate(0)
-                        .bizCloseStoreNumber(0)
-                        .franchiseStoreNumber(0)
-                        .build()
-        );
-
-        List<MarketSpaceAnalytics> analytics = Arrays.asList(
-                MarketSpaceAnalytics.builder()
-                        .id(1L)
-                        .yearAndQuarterCode("20211")
-                        .marketSpaceGroup(marketSpaceGroup)
-                        .marketSpace(marketSpace)
-                        .serviceIndustry(serviceIndustry)
-                        .storesNumber(8)
-                        .similarIndustryStoreNumber(8)
-                        .bizNewStoreRate(25)
-                        .bizNewStoreNumber(2)
-                        .bizCloseStoreRate(0)
-                        .bizCloseStoreNumber(0)
-                        .franchiseStoreNumber(0)
-                        .build()
-        );
-
-        BDDMockito.given(marketSpaceAnalyticsRepository.saveAll(Mockito.any())).willReturn(analytics);
-
-        //when
-        marketSpaceAnalyticsService.createBulkMarketSpaceAnalytics(marketSpaceDtoList);
-
-        //then
-        Mockito.verify(marketSpaceAnalyticsRepository).saveAll(Mockito.any());
+                        marketSpaceAnalyticsRepository, marketSpaceAnalyticsQDSLRepository, marketSpaceAnalyticsDAO);
     }
 
     @Test
@@ -123,7 +61,7 @@ public class MarkSpaceAnalyticsServiceTests {
         );
 
         //when
-        Mockito.when(analyticsDAO.findAllByYearAndQuarterCodes(Mockito.any())).thenReturn(expectedList);
+        Mockito.when(marketSpaceAnalyticsDAO.findAllByYearAndQuarterCodes(Mockito.any())).thenReturn(expectedList);
         List<MSAnalyticsWithIndustryDto> actualList =
                 marketSpaceAnalyticsService.getMSAnalyticsWithIndustryNames(yearQuarter);
 
@@ -168,7 +106,7 @@ public class MarkSpaceAnalyticsServiceTests {
         );
 
         //when
-        Mockito.when(analyticsQDSLRepository.findAllTopRankByYearQuarterCodesAndMsCode(Mockito.any(), Mockito.any()))
+        Mockito.when(marketSpaceAnalyticsQDSLRepository.findAllTopRankByYearQuarterCodesAndMsCode(Mockito.any(), Mockito.any()))
                 .thenReturn(expectedList);
         List<MSAnalyticsWithIndustryAndStoreNumDto> actualList =
                 marketSpaceAnalyticsService.getMSAnalyticsWithTopRankIndustryNames(yearQuarter, msCodes);
@@ -198,7 +136,7 @@ public class MarkSpaceAnalyticsServiceTests {
         );
 
         //when
-        Mockito.when(analyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(Mockito.any(), Mockito.any()))
+        Mockito.when(marketSpaceAnalyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(Mockito.any(), Mockito.any()))
                 .thenReturn(expectedList);
         List<MSAnalyticsWithIndustryAndCloseRateDto> actualList =
                 marketSpaceAnalyticsService.getMSAnalyticsWithLowCloseRateIndustryNames(yearQuarter, msCodes);

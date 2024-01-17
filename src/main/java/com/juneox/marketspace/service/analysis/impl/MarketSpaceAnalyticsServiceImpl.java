@@ -5,9 +5,9 @@ import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStor
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryDto;
 import com.juneox.marketspace.domain.analysis.dto.MarketSpaceAnalyticsDto;
 import com.juneox.marketspace.domain.analysis.entity.MarketSpaceAnalytics;
-import com.juneox.marketspace.persistence.jdbc.AnalyticsDAO;
+import com.juneox.marketspace.persistence.jdbc.MarketSpaceAnalyticsDAO;
 import com.juneox.marketspace.persistence.jpa.MarketSpaceAnalyticsRepository;
-import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
+import com.juneox.marketspace.persistence.qdsl.MarketSpaceAnalyticsQDSLRepository;
 import com.juneox.marketspace.service.analysis.MarketSpaceAnalyticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
 public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsService {
 
     private final MarketSpaceAnalyticsRepository marketSpaceAnalyticsRepository;
-    private final AnalyticsQDSLRepository analyticsQDSLRepository;
-    private final AnalyticsDAO analyticsDAO;
+    private final MarketSpaceAnalyticsQDSLRepository marketSpaceAnalyticsQDSLRepository;
+    private final MarketSpaceAnalyticsDAO marketSpaceAnalyticsDAO;
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
@@ -46,7 +46,7 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
                         .build())
                 .collect(Collectors.toList());
 
-        marketSpaceAnalyticsRepository.saveAll(marketSpaceAnalytics);
+        marketSpaceAnalyticsDAO.saveAll(marketSpaceAnalytics);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
     @Transactional(readOnly = true)
     @Override
     public List<MSAnalyticsWithIndustryDto> getMSAnalyticsWithIndustryNames(List<String> yearAndQuarters) {
-        List<MSAnalyticsWithIndustryDto> results = analyticsDAO.findAllByYearAndQuarterCodes(yearAndQuarters);
+        List<MSAnalyticsWithIndustryDto> results = marketSpaceAnalyticsDAO.findAllByYearAndQuarterCodes(yearAndQuarters);
         return results;
     }
 
@@ -70,7 +70,7 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
     public List<MSAnalyticsWithIndustryAndStoreNumDto> getMSAnalyticsWithTopRankIndustryNames(List<String> yearAndQuarters, List<String> marketSpaceCodes) {
 
         List<MSAnalyticsWithIndustryAndStoreNumDto> results =
-                analyticsQDSLRepository.findAllTopRankByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
+                marketSpaceAnalyticsQDSLRepository.findAllTopRankByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
         return results;
     }
 
@@ -79,7 +79,7 @@ public class MarketSpaceAnalyticsServiceImpl implements MarketSpaceAnalyticsServ
     public List<MSAnalyticsWithIndustryAndCloseRateDto> getMSAnalyticsWithLowCloseRateIndustryNames(List<String> yearAndQuarters, List<String> marketSpaceCodes) {
 
         List<MSAnalyticsWithIndustryAndCloseRateDto> topLowCloseRateIndustries =
-                analyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
+                marketSpaceAnalyticsDAO.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarters, marketSpaceCodes);
 
         return topLowCloseRateIndustries;
     }

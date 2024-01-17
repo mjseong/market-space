@@ -1,11 +1,10 @@
 package com.juneox.marketspace.test.persistence;
 
-import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndCloseRateDto;
 import com.juneox.marketspace.domain.analysis.dto.MSAnalyticsWithIndustryAndStoreNumDto;
 import com.juneox.marketspace.domain.analysis.entity.QMarketSpaceAnalytics;
 import com.juneox.marketspace.domain.exception.NoSupportedException;
-import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepository;
-import com.juneox.marketspace.persistence.qdsl.AnalyticsQDSLRepositoryImpl;
+import com.juneox.marketspace.persistence.qdsl.MarketSpaceAnalyticsQDSLRepository;
+import com.juneox.marketspace.persistence.qdsl.MarketSpaceAnalyticsQDSLRepositoryImpl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -23,15 +22,15 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
-public class AnalyticsQDSLRepositoryTests {
+public class MarketSpaceAnalyticsQDSLRepositoryTests {
 
     @Mock
     JPAQueryFactory jpaQueryFactory;
-    AnalyticsQDSLRepository analyticsQDSLRepository;
+    MarketSpaceAnalyticsQDSLRepository marketSpaceAnalyticsQDSLRepository;
 
     @BeforeEach
     void init(){
-        this.analyticsQDSLRepository = new AnalyticsQDSLRepositoryImpl(jpaQueryFactory);
+        this.marketSpaceAnalyticsQDSLRepository = new MarketSpaceAnalyticsQDSLRepositoryImpl(jpaQueryFactory);
     }
 
     @Test
@@ -95,7 +94,7 @@ public class AnalyticsQDSLRepositoryTests {
 
         //when
         List<MSAnalyticsWithIndustryAndStoreNumDto> actualList =
-        analyticsQDSLRepository.findAllTopRankByYearQuarterCodesAndMsCode(yearAndQuarterCodes, marketSpaceCodes);
+        marketSpaceAnalyticsQDSLRepository.findAllTopRankByYearQuarterCodesAndMsCode(yearAndQuarterCodes, marketSpaceCodes);
 
         Assertions.assertEquals(expectedList.size(), actualList.size());
     }
@@ -107,7 +106,7 @@ public class AnalyticsQDSLRepositoryTests {
         List<String> marketSpaceCodes = Arrays.asList("3110024","3110025");
 
         Assertions.assertThrows(NoSupportedException.class, ()->{
-            analyticsQDSLRepository.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarterCodes, marketSpaceCodes);
+            marketSpaceAnalyticsQDSLRepository.findAllCloseRateByYearQuarterCodesAndMsCode(yearAndQuarterCodes, marketSpaceCodes);
         });
     }
 
