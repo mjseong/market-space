@@ -13,6 +13,7 @@ import com.juneox.marketspace.service.meta.MarketSpaceService;
 import com.juneox.marketspace.service.meta.ServiceIndustryService;
 import com.juneox.marketspace.service.raw.FileMetaService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -49,6 +50,13 @@ public class MetaDataFacadeServiceTests {
 
     @MockBean
     FileMetaService fileMetaService;
+
+    @BeforeEach
+    void init(){
+        MetaCacheStore.getInstance().getMarketSpaceGroupDtoMap().clear();
+        MetaCacheStore.getInstance().getMarketSpaceDtoMap().clear();
+        MetaCacheStore.getInstance().getServiceIndustryDtoMap().clear();
+    }
 
     @Transactional
     @Test
