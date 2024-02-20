@@ -31,6 +31,14 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.0.2'
 
+	//mock server
+	implementation 'org.mock-server:mockserver-netty:5.14.0'
+
+	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+
+	testImplementation 'org.mockito:mockito-inline:5.2.0'
+
 	annotationProcessor 'io.github.openfeign.querydsl:querydsl-apt:5.2:jakarta'
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
